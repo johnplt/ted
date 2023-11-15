@@ -7,3 +7,4 @@ elasticsearch_dsl==8.9.0
 beautifulsoup4==4.12.2
 lxml==4.9.3
 requests==2.31.0
+pandas==2.1.3
