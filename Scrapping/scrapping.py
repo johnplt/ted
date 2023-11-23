@@ -6,7 +6,7 @@ import hashlib
 import re
 import pandas as pd
 
-base_url = "https://choisirleservicepublic.gouv.fr/nos-offres/filtres/domaine/3522/page/{}"
+base_url = "https://choisirleservicepublic.gouv.fr/nos-offres/filtres/mot-cles/accessibilité/"
 
 # Créer une liste pour stocker les données
 data_list = []
@@ -195,34 +195,34 @@ for i in range(1, 20):
                                     texte_contenu = contenu.text.strip()
                                     informations[titre_info] = texte_contenu
 
-                        # Trouver le lien de téléchargement PDF
-                        lien_download = offre_soup.find(
-                            'a', class_='link-download')
-                        if lien_download:
-                            url_pdf = lien_download['href']
-                            nom_fichier = hashlib.md5(
-                                url_pdf.encode()).hexdigest() + ".pdf"
-                            chemin_fichier = os.path.join(
-                                'pdf', nom_fichier)  # Chemin du fichier local
+                        # # Trouver le lien de téléchargement PDF
+                        # lien_download = offre_soup.find(
+                        #     'a', class_='link-download')
+                        # if lien_download:
+                        #     url_pdf = lien_download['href']
+                        #     nom_fichier = hashlib.md5(
+                        #         url_pdf.encode()).hexdigest() + ".pdf"
+                        #     chemin_fichier = os.path.join(
+                        #         'pdf', nom_fichier)  # Chemin du fichier local
 
-                            # Télécharger le fichier PDF
-                            response_pdf = requests.get(url_pdf)
-                            if response_pdf.status_code == 200:
-                                # Créer le nouveau nom de fichier avec le numéro de référence
-                                nouveau_nom_fichier = reference + "_" + nom_fichier
+                        #     # Télécharger le fichier PDF
+                        #     response_pdf = requests.get(url_pdf)
+                        #     if response_pdf.status_code == 200:
+                        #         # Créer le nouveau nom de fichier avec le numéro de référence
+                        #         nouveau_nom_fichier = reference + "_" + nom_fichier
 
-                                # Chemin complet du fichier avec le nouveau nom
-                                chemin_fichier = os.path.join(
-                                    'pdf', nouveau_nom_fichier)
+                        #         # Chemin complet du fichier avec le nouveau nom
+                        #         chemin_fichier = os.path.join(
+                        #             'pdf', nouveau_nom_fichier)
 
-                                with open(chemin_fichier, 'wb') as pdf_file:
-                                    pdf_file.write(response_pdf.content)
-                                print("Fichier PDF téléchargé :", chemin_fichier)
-                            else:
-                                print(
-                                    "Échec du téléchargement du fichier PDF :", response_pdf.status_code)
-                        else:
-                            print("Aucun lien de téléchargement PDF trouvé")
+                        #         with open(chemin_fichier, 'wb') as pdf_file:
+                        #             pdf_file.write(response_pdf.content)
+                        #         print("Fichier PDF téléchargé :", chemin_fichier)
+                        #     else:
+                        #         print(
+                        #             "Échec du téléchargement du fichier PDF :", response_pdf.status_code)
+                        # else:
+                        #     print("Aucun lien de téléchargement PDF trouvé")
 
                         # Trouver toutes les adresses e-mail dans le contenu HTML
                         adresses_email = re.findall(
@@ -291,7 +291,7 @@ for i in range(1, 20):
                         data_list.append(data)
                         print(data_list)
                     # Enregistrer la liste de données dans un fichier JSON
-                        with open('../Client/donnees_offres.json', 'w', encoding='utf-8') as json_file:
+                        with open('donnees_offres_access.json', 'w', encoding='utf-8') as json_file:
                             json.dump(data_list, json_file,
                                       ensure_ascii=False, indent=4)
 
