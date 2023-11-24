@@ -1,4 +1,6 @@
 notebook/.ipynb_checkpoints/
 __pycache__
 donnees_offres_access.json
+offres_donnees.json
 nohup.out
+offres_access_V2.json

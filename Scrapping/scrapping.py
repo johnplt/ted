@@ -6,16 +6,16 @@ import hashlib
 import re
 import pandas as pd
 
-base_url = "https://choisirleservicepublic.gouv.fr/nos-offres/filtres/mot-cles/accessibilité/"
+base_url = "https://choisirleservicepublic.gouv.fr/nos-offres/filtres/mot-cles/accessibilité/page/{}/"
 
 # Créer une liste pour stocker les données
 data_list = []
 
 # Créer le dossier "pdf" s'il n'existe pas
-os.makedirs('pdf', exist_ok=True)
+#os.makedirs('pdf', exist_ok=True)
 
 # Parcourir les pages de 1 à ...
-for i in range(1, 20):
+for i in range(1, 480):
     url = base_url.format(i)
 
     # Envoyer une requête GET à l'URL de la page courante
@@ -291,7 +291,7 @@ for i in range(1, 20):
                         data_list.append(data)
                         print(data_list)
                     # Enregistrer la liste de données dans un fichier JSON
-                        with open('donnees_offres_access.json', 'w', encoding='utf-8') as json_file:
+                        with open('offres_access_V2.json', 'w', encoding='utf-8') as json_file:
                             json.dump(data_list, json_file,
                                       ensure_ascii=False, indent=4)
 
